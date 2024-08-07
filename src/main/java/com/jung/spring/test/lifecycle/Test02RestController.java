@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@RestController // ResponseBody + Controller
 @RequestMapping("/lifecycle/test02")
 public class Test02RestController {
 
@@ -70,8 +70,8 @@ public class Test02RestController {
 	
 	
 	@RequestMapping("/2")
-	public List<NoticBoard> objectResponse() {
-		
+	public List<NoticBoard> objectResponse() {// <NoticBoard>는 내가 직접 만들어준 클래스를 타입으로 쓰는것으로써 class를 보면 알겠지만 map형태로 되어있음
+											  // 또한 기본생성자를 통해 반드시 들어가야할 성질 멤버변수가 필요하고 거기에 대응하는 값이 결국 Value가 되는것
 		List <NoticBoard> boardList = new ArrayList<>();
 		
 		
@@ -87,6 +87,7 @@ public class Test02RestController {
 		
 		
 	}
+	
 	
 	
 	@RequestMapping("/3")
