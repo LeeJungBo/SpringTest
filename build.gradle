@@ -32,6 +32,11 @@ dependencies {
 	
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf'
 	//이렇게 추가나 수정시에는 반드시 gradle아이콘 오른클릭 누르고 refresh항목이 아닌 gradle항목에서 refresh gradle project를 눌러야함
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
+	runtimeOnly 'com.mysql:mysql-connector-j'
+	
+	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3'
+
 }
 
 tasks.named('test') {

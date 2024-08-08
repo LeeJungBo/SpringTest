@@ -11,7 +11,7 @@ public class Test03Controller {
 	@RequestMapping("/lifecycle/test03")
 	public String thymeleafTest(){
 		return "lifecycle/test03";
-	}       
+	}     
 	                            
 	
 	
