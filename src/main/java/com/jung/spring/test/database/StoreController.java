@@ -1,4 +1,4 @@
-package com.jung.spring.test;
+package com.jung.spring.test.database;
 
 import java.util.List;
 
@@ -12,6 +12,7 @@ import com.jung.spring.test.database.service.StoreService;
 
 @Controller
 public class StoreController {
+
 	//request와 response역할만 해야됨
 	
 	@Autowired						
@@ -32,4 +33,8 @@ public class StoreController {
 		return storeList;
 		
 	}
+	
+	
+	
+	
 }

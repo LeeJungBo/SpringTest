@@ -3,7 +3,7 @@ package com.jung.spring.test.database.domain;
 import java.time.LocalDateTime;
 
 public class Store {
-
+	// Mapper에서 조회된 데이터정보를 자바의 문법과 코드로 바꿔주고 저장시켜주기위해 있는것
 	private int id;
 	private String name;
 	private String phoneNumber;

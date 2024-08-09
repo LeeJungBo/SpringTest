@@ -4,9 +4,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
- <mapper namespace="com.jung.spring.test.database.repository.StoreRepository">
+ <mapper namespace="com.jung.spring.test.database.repository.StoreRepository"><!-- 얘는 자바가 아니기에 자바 주소를 항상 딱 맞춰서 써줘야함 -->
  
- 	<select id="selectStoreList" resultType="com.jung.spring.test.database.domain.Store">
+ 	<select id="selectStoreList" resultType="com.jung.spring.test.database.domain.Store"><!-- 여기안에다가 메소드의 값을 정의해주는것과 같다(메소드에서 정의해줄건 딱 3개 1. 메소드 이름 2. 리턴타입 3. 파라미터 --> 
  		SELECT
  			`id`
  			, `name`
