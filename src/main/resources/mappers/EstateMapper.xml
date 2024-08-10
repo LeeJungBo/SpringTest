@@ -45,7 +45,7 @@
  	</select>
  	
  	<select id="selectEstateAreaOrPrice" resultType="com.jung.spring.test.estateMybatis.domain.Estate"
- 	parameterType="int"> 
+ 	parameterType="int"> <!-- 만약 서로다른 타입이면 (parameterType을"map"으로 처리) --> 
 	 	SELECT
 		 		`id`
 		 		, `realtorId`
@@ -59,14 +59,77 @@
 		 	FROM
 		 		`real_estate`
 		 	WHERE
-		 		`price` <![CDATA[ < ]]> #{price}
+		 		`price` <![CDATA[ <= ]]> #{price}
 		 	AND
 		 		`area` <![CDATA[ > ]]> #{area}
+		 	AND 
+		 		`type` = '매매' <!-- "매매중"이라고 나옴 따라서 조건 매매라는거 붙여줘야함 -->
 		 	ORDER BY
 		 		`createdAt` 
 		 		
  	
  	</select>
+ 	
+ 	<insert id="insertEstateByObject" parameterType="com.jung.spring.test.estateMybatis.domain.Estate">
+ 		INSERT
+ 			`real_estate`
+ 		(	`realtorId`
+ 			, `address`
+ 			, `area`
+ 			, `type`
+ 			, `price`
+ 		)
+ 		VALUES
+ 		(	#{realtorId}
+ 			, #{address}
+ 			, #{area}
+ 			, #{type}
+ 			, #{price}
+ 		)
+ 		
+ 		
+ 		
+ 	</insert>
+ 		
+ 	<!-- (realtorId, "썅떼빌리버 오피스텔 814호", 45, "월세", 100000, 120);  -->
+ 	<insert id="insertEstateByObjectAndParamter" parameterType="map">
+	 	INSERT
+	 			`real_estate`
+	 		(	`realtorId`
+	 			, `address`
+	 			, `area`
+	 			, `type`
+	 			, `price`
+	 			, `rentPrice`
+	 		)
+	 		VALUES
+	 		(	#{realtorId}
+	 			, #{address}
+	 			, #{area}
+	 			, #{type}
+	 			, #{price}
+	 			, #{rentPrice}
+	 		)
+ 	 </insert>
+ 	 
+ 	 <update  id="updateEstateByObject" parameterType="map" >
+ 	 	UPDATE
+ 	 		`real_estate`
+ 	 	SET
+ 	 		`type` = #{type}
+ 	 		, `price` = #{price}
+ 	 		, `updatedAt` = now()
+ 	 	WHERE
+ 	 		`id` = #{id}
+ 	 </update>
+ 	 
+ 	 <delete id="deleteEstateByObject" parameterType="int">
+ 	 	DELETE
+ 	 	FROM
+ 	 		`real_estate`
+ 	 	WHERE
+ 	 		`id` = #{id}
+ 	 </delete>
  
  
  </mapper>

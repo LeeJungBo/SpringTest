@@ -29,6 +29,31 @@ public class EstateService {
 		return estateAreaOrPrice;
 	}
 	
+	// insert 쿼리는 int로 고정되어있음
+	public int addEstateByObject(Estate estate) {
+		int count = estateRepository.insertEstateByObject(estate);
+		return count;
+	}
 	
+	public int addEstateByObjectAndParameter(int realtorId
+											, String address
+											, int area
+											, String type
+											, int price
+											, int rentPrice) {
+		int count = estateRepository.insertEstateByObjectAndParamter(realtorId, address, area, type, price, rentPrice);
+		return count;
+		
+	}
+	
+	public int getUpdateEstate(String type, int price, int id) {
+		int count = estateRepository.updateEstateByObject(type, price, id);
+		return count;
+	}
+	
+	public int getDeleteEstate(int id) {
+		int count = estateRepository.deleteEstateByObject(id);
+		return count;
+	}
 	
 }
