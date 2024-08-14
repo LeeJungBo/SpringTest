@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Seller Mapper에다가 2개의 기능을 넣어야한다 (Insert와 select기능 -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.jung.spring.test.seller.repository.SellerRepository">
+	
+	
+	
+	
+	<insert id="insertByObjectParameter" parameterType="map">
+		INSERT
+			`seller`
+		(	`nickname`
+			, `temperature`
+			, `profileImage`
+		)
+		VALUES
+		(	#{nickname}
+			, #{temperature}
+			, #{profileImage}
+		)
+	</insert>
+	
+	
+	
+	<select id="selectLastSeller" resultType="com.jung.spring.test.seller.domain.Seller"> <!-- 파라미터가 없을때는 이걸로 -->
+		SELECT
+			`id`
+			,`nickname`
+			, `temperature`
+			, `profileImage`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`seller`
+		ORDER BY
+			`id` DESC
+		LIMIT
+			1
+	</select>
+	
+	
+	
+    <select id="selectSeller" parameterType="Integer" resultType="com.jung.spring.test.seller.domain.Seller"> 
+		SELECT
+			`id`
+			,`nickname`
+			, `temperature`
+			, `profileImage`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`seller`
+		WHERE
+			`id` = #{id}
+	</select>
+
+
+
+</mapper>
