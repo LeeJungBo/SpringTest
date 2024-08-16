@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jung.spring.test.realtor.repository.RealtorRepository">
+
+	<insert id="insertRealtorByObject" parameterType="com.jung.spring.test.realtor.domain.Realtor"
+	useGeneratedKeys="true" keyProperty="id"> <!-- useGeneratedKeys 이건 이 형식을 쓰겠다는거고(객체 자체를 insert와 동시에 select하는 방식  -->
+		INSERT INTO							  <!-- keyProperty는 이 모든 형식을 받아들이고 이걸 (현재 놀고있는)id에 담아서(매칭시켜서) 쓰겠다는거  -->
+			`realtor`
+		(   `office`
+			, `phoneNumber`
+			, `address`
+			, `grade`
+		)
+		VALUES
+		(	#{office}
+			, #{phoneNumber}
+			, #{address}
+			, #{grade}
+		)
+	</insert>
+
+
+
+
+
+
+</mapper>

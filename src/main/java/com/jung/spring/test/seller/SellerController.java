@@ -43,7 +43,7 @@ public class SellerController {
 	
 	
 	@GetMapping("/output") // 아하 @RequestParam(value = "id", required=false 여기서 required값을 false로 해줘야하는구나 (알아갈것 Integer은 null값을 가질수 있음))
-	public String lastSellerOutput(@RequestParam(value = "id", required=false) Integer id, Model model) { // RequestParam도 숨겨져 있는게 있다.(value = "id", required=true(필수라는거))숨겨져 있는거
+	public String lastSellerOutput(@RequestParam(value = "id", required = false) Integer id, Model model) { // RequestParam도 숨겨져 있는게 있다.(value = "id", required=true(필수라는거))숨겨져 있는거
 //		Seller lastSeller = sellerService.getLastSeller();					 // true를 false도 나올수 있게 한다. null을 저장할수 있는 wrapper타입으로 바꿔준다
 		
 		// id가 전달이 안되면 최근 판매자 조회
