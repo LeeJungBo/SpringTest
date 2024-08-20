@@ -17,7 +17,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="music, status:${musicRanking}">
+				<tr th:each="music, status:${musicRanking}"> <!-- 꼭 status일 필요는 없음 2번째 나오는게 상태를 의미하는거 -->
 					<td th:text="|${status.count}|">1</td>
 					<td th:text="${music}">강남스타일</td>
 				</tr>
@@ -44,18 +44,21 @@
 				<tr th:each="member:${membership}">
 					<td th:text="${member.name}">손오공</td>
 					<td th:text="${member.phoneNumber}">010-4321-1234</td>
-					
-					
-					<td th:if="${member.grade == 'VIP'}" class="text-danger" th:text="${member.grade}">
+					<td th:switch="${member.grade}">
+						<span th:case="VIP" class="text-danger"></span>
+						<span th:case="GOLD" class="text-warning"></span>
+						<span th:case="*"></span>
+					</td>
+					<!--  <td th:if="${member.grade == 'VIP'}" class="text-danger" th:text="${member.grade}">
 					</td>
 					<td th:if="${member.grade == 'GOLD'}" class="text-warning" th:text="${member.grade}">
 					</td>
 					<td th:if="${member.grade == 'BASIC'}" th:text="${member.grade}">
+					</td>-->
+					<td>
+						<span th:if="${member.point >= 5000}" class="text-primary" th:text="|${member.point}P|">12040P</span>
+						<span th:unless="${member.point >= 5000}" th:text="|${member.point}P|">12040P</span>
 					</td>
-					
-					
-					<td th:if="${member.point >= 5000}" class="text-primary" th:text="${member.point}">12040P</td>
-					<td th:unless="${member.point >= 5000}" th:text="${member.point}">12040P</td>
 				</tr>
 			</tbody>
 		</table>
