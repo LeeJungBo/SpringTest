@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+#wrap{
+	
+}
+
+section{
+	
+}
+
+section > .main-manu{
+	width: 160px;
+}
+
+.main-manu > .logo{
+	
+}
+
+section > .information{
+	width: 1140px;
+	
+}
+
+.input-label {
+	width: 120px;
+	text-align: right;
+}
+
+footer{
+	width: 1200px;
+	height: 100px;
+}
+
+footer > .logo2{
+	width: 160px;
+}
