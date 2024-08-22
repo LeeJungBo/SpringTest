@@ -12,7 +12,7 @@ import com.jung.spring.test.weatherhistory.repository.WeatherHistoryRepository;
 public class WeatherHistoryService {
 
 	@Autowired
-	WeatherHistoryRepository weatherHistoryRepository;
+	private WeatherHistoryRepository weatherHistoryRepository;
 	
 	public List<WeatherHistory> getWeatherHistory() {
 		List<WeatherHistory> weatherHistory = weatherHistoryRepository.selectWeatherHistory();

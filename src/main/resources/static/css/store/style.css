@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+#wrap{
+	width:700px;
+	margin: 0 auto;
+}
+
+header{
+	height:100px;
+}
+
+.item{
+	height: 120px;
+	border-width: 2px;
+ 	border-style: solid;
+ 	border-color: aqua;
+}
