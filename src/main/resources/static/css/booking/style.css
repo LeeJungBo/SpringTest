@@ -1,0 +1,45 @@
+@charset "UTF-8";
+
+#wrap{
+	width:1200px;
+	margin: 0 auto;
+}
+
+header{
+	height:100px;
+}
+
+
+
+.list th, .list td{
+	vertical-align:middle;
+	text-align: center;
+}
+
+section > .main-manu{
+	height:50px;
+	background-color: #e47610;
+	
+}
+
+section > .container{
+	width: 500px;
+	margin: 0 auto;
+}
+
+.sub-banner{
+	height:250px;
+	background-color: brown;
+}
+
+.member{
+	background-color: orange
+}
+
+.request{
+	background-color: brown;
+}
+
+footer{
+	height:100px;
+}

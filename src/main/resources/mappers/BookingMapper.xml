@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.jung.spring.test.booking.repository.BookingRepository">
+ 
+ 	<select id="selectBooking" resultType="com.jung.spring.test.booking.domain.Booking">
+ 		SELECT
+ 			`id`
+ 			, `name`
+ 			, `headCount`
+ 			, `day`
+ 			, `date`
+ 			, `phoneNumber`
+ 			, `state`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		FROM
+ 			`booking`
+ 	</select>
+ 	
+ 	<delete id="deleteByObject" parameterType="int">
+ 		DELETE
+ 		FROM
+ 			`booking`
+ 		WHERE
+ 			`id`=#{id};
+ 	</delete>
+ 	
+ 	<insert id="createByObject" parameterType="map">
+ 		INSERT INTO
+ 			`booking`
+ 			( 
+ 			`name`
+ 			 , `headCount`
+ 			 , `day`
+ 			 , `date`
+ 			 , `phoneNumber`
+ 			 , `state`
+ 			)
+ 		VALUES
+ 			( 
+ 			#{name}
+ 			, #{headCount}
+ 			, #{day}
+ 			, #{date}
+ 			, #{phoneNumber}
+ 			, #{state}
+ 			)
+ 	 </insert>
+ 	 
+ 	 <select id="selectLookUpBooking" parameterType="String" resultType="com.jung.spring.test.booking.domain.Booking">
+ 	 	SELECT
+ 	 	 	`id`
+ 			, `name`
+ 			, `headCount`
+ 			, `day`
+ 			, `date`
+ 			, `phoneNumber`
+ 			, `state`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		FROM
+ 			`booking`
+ 		WHERE
+ 			`name`=#{name}
+ 		AND
+ 			`phoneNumber`=#{phoneNumber};
+ 	 </select>
+ 
+ 
+ 
+ 
+ </mapper>

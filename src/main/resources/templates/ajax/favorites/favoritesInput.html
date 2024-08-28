@@ -5,17 +5,21 @@
 <title>즐겨찾기 입력</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/css/favorites/style.css">
 </head>
 <body>
 
-	
-	<h1>즐겨 찾기 추가하기</h1>
-	<label>제목</label><br>
-	<input type="text" class="form-control" id="nameInput"><br>
-	<label>주소</label><br>
-	<input type="text" class="form-control" id="urlInput">
-	<button type="button" class="form-control btn btn-info mt-4" id="saveBtn">저장</button>
-
+	<div class="containner">
+		<h1>즐겨 찾기 추가하기</h1>
+		<label>제목</label><br>
+		<input type="text" class="form-control col-10" id="nameInput"><br>
+		<label>주소</label><br>
+		<div class="d-flex">
+			<input type="text" class="form-control col-10" id="urlInput"><button type="button" id="duplicateBtn" class="ml-3 btn btn-info col-1">중복</button>
+		</div>
+		<div id="duplicateUrl" class="small d-none text-danger">중복된 주소입니다.</div>
+		<button type="button" class="form-control btn btn-info mt-4" id="saveBtn">저장</button>
+	</div>
 
 
 
@@ -27,6 +31,39 @@
 		<script>
 		
 			$(document).ready(function(){
+				
+				
+				$("#duplicateBtn").on("click",function(){
+					
+					let url = $("#urlInput").val();
+					
+					$.ajax({
+						type:"post"
+						, url:"/ajax/duplicate-url"
+						, data:{"url":url}
+						, success:function(data){
+							
+							if(data.isDuplicate){
+								$("#duplicateUrl").removeClass("d-none");
+							}else{
+								alert("사용 가능한 주소입니다.^^")
+								$("#duplicateUrl").addClass("d-none");
+							}
+							
+						}
+						, error:function(){
+							alert("에러입니다....")
+							
+						}
+					});
+					
+				  });
+				
+				
+				
+				
+				
+				
 				
 				$("#saveBtn").on("click", function(){
 					
@@ -44,11 +81,17 @@
 						return ;
 					}
 					
+					// 이것도 했었어야 한다.
+					if(!url.startsWith("http://") && !url.startsWith("https://")){
+						alert("주소를 확인해주세요");
+						return ;
+					}
+					
 					$.ajax({ // ajax는 json을 문자열로 받는것이다 이것을 반드시 명심할것
 						type:"post"
 						, url:"/ajax/create"
-						, data:{"name":name, "url":url}
-						, success:function(data){
+						, data:{"name":name, "url":url} // 여기까지는 요청임 이 뒤부터는 응답임
+						, success:function(data){ // 만약 여기가 자바였으면 타입도 있는 형태였어야하는데 스크립트여서 없는거 (int data) 이것처럼
 							// 여기서의 data는 결국 controller의 모든 과정을 수행하고 인자로 받은 결과
 							if(data.result == "success"){
 								location.href = "/ajax/list";
@@ -61,11 +104,16 @@
 							alert("추가 에러!!")
 						}
 					});
-							
-						
-					
 					
 				});
+				
+				
+				
+				
+				
+				
+				
+				
 					
 					
 			});

@@ -18,5 +18,10 @@ public interface FavoritesRepository {
 			, @Param("url") String url);
 	
 	
+	public int selectUrl(@Param("url") String url);
+	
+	
+	public int deleteByOfObject(@Param("id") int id);
+	
 	
 }

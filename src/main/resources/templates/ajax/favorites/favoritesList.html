@@ -22,17 +22,60 @@
 				<td th:text="${favorites.id}">1</td>
 				<td th:text="${favorites.name}">마론달</td>
 				<td th:text="${favorites.url}">http://marondal.com</td>
-			</tr>
-		</tbody>
-	</table>
+				<td><button type="button" th:data-favorites-id="${favorites.id}" class="delete-Btn sm btn btn-danger">삭제</button></td>
+			</tr>         <!-- th:value 이렇게 해야 thymeleaf문법이 되고 숫자(정수로 된다) th안넣으면 얘는 문자열로만 보인다. -->
+		</tbody>			<!-- data-favorites-id="${favorites.id}" "이 data"기능은 유일하게 사용자가 원하는 기능을 사용할수있게 하는 기능이다.(경우에 따라서 value값을 쓸수 없을대 쓸수있는거) -->
+	</table>				<!-- val에서 또 data로 바꾸니깐 400뜨네 ㅅㅂ 답지 보면서 하기 th 붙이니깐 또 되네 -->
+							<!-- th:data-favorites-id 여기서 결국 "favorites-id" 요거는 그냥 태그속성(즉, 아무렇게나 써줘도 된다 다만 밑애 자바스크립트의 문구와 맞출려는 글자일뿐이다. -->
 
 
 
 
 
 
-		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+		<script>
+			$(document).ready(function(){
+				
+				$(".delete-Btn").on("click", function(){
+					
+					let id = $(this).data("favorites-id"); // this 란 그 수많은 태그중에 지금 내가 누른 그 버튼의 이벤트라는 의미이다. data-favorites-id="${favorites.id}"라는 속성을 이용하기 위함
+					
+					//alert(id); 이런식으로 내가 전달하는 값이 문자열인지 정수인지 확인할것
+					
+					
+					$.ajax({
+						type:"get"
+						, url:"/ajax/delete-url"
+						, data:{"id":id}
+						, success:function(data){
+							if(data.result == "success"){
+								alert("삭제 성공");
+								location.reload(); // 새로 고침되는 기능
+							}else{
+								alert("삭제 실패");
+							}
+							
+						}
+						,error:function(){
+							alert("에러!!");
+						}
+							
+							
+					});
+					
+					
+				});
+				
+				
+				
+			});
+		
+		
+		</script>
+
+
 </body>
 </html>

@@ -36,6 +36,7 @@ public class StoreController {
 	}
 	
 	
+	
 	@RequestMapping("/thymeleaf/store/list")
 	public String store(Model model){
 		

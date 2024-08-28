@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>통나무 팬션</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/css/booking/style.css">
+</head>
+<body>
+	
+	
+	
+	
+	<div id="wrap">
+		<header class="d-flex justify-content-center align-items-center display-4 text">
+			<div class="title-text"><a href="http://localhost:8080/booking/lookUp-booking" class="text-dark">통나무 팬션</a></div>
+		</header>
+		<section class="mb-4">
+			<nav class="main-manu">
+				<ul class="nav nav-fill font-weight-bold">
+					<li class="nav-item mt-1"><a href="#" class="nav-link text-white">팬션소개</a></li>
+					<li class="nav-item mt-1"><a href="#" class="nav-link text-white">객실보기</a></li>
+					<li class="nav-item mt-1"><a href="http://localhost:8080/booking/input-booking" class="nav-link text-white">예약하기</a></li>
+					<li class="nav-item mt-1"><a href="http://localhost:8080/booking/list" class="nav-link text-white">예약목록</a></li>
+				</ul>
+			</nav>
+			<h1 class="text-center mt-4">예약하기</h1>
+			<div class="container text-center mt-4">
+				<label>이름</label><br> 
+				<input type="text" id="nameInput" class="form-control col-12"><br>
+				<label>예약날짜</label><br>
+				<input type="text" id="dateInput" class="form-control col-12"><br>
+				<label>숙박일수</label><br>
+				<input type="text" id="dayInput" class="form-control col-12"><br>
+				<label>숙박인원</label><br>
+				<input type="text" id="headCountInput" class="form-control col-12"><br>
+				<label>전화번호</label><br>
+				<input type="text" id="phoneNumberInput" class="form-control col-12" placeholder="-가 들어있게 써주세요">
+				<button type="button" class="btn btn-warning mt-3 form-control col-12" id="bookingBtn">예약하기</button>
+			</div>
+		</section>
+		<footer class="pt-3 pl-3">
+			<div class="small text-secondary">
+				제주특별자치도 제주시 애월읍<br>
+				사업자등록번호: 111-22-255222/농어촌민박사업자지정/대표:김통목<br>
+				Copyright 2025 tongnamu All right reserved
+			</div>
+		</footer>
+	</div>
+
+	
+
+
+
+
+
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/ui/1.14.0/jquery-ui.js"></script>
+		<script>
+			
+			$(document).ready(function(){
+				
+				
+				$("#dateInput").datepicker({
+					dateFormat:"yy-mm-dd"
+				});
+				
+				
+				$("#bookingBtn").on("click", function(){
+					
+					let name = $("#nameInput").val();
+					let date = $("#dateInput").val();
+					let day = $("#dayInput").val();
+					let headCount = $("#headCountInput").val();
+					let phoneNumber = $("#phoneNumberInput").val();
+					
+					if(name == ""){
+						alert("이름을 입력하세요");
+						return;
+					}
+					
+					if(date == ""){
+						alert("예약날짜을 입력하세요");
+						return;
+					}
+					
+					if(day == ""){
+						alert("숙박일수를 입력하세요");
+						return;
+					}
+					
+					// day가 숫자가 아닌 경우
+					// Not a Number
+					if(isNaN(day)){
+						alert("일수는 숫자만 입력 가능합니다.")
+						return;
+					}
+					
+					
+					if(headCount == ""){
+						alert("숙박인원을 입력하세요");
+						return;
+					}
+					
+					if(isNaN(headCount)){
+						alert("인원을 숫자로 입력해주세요")
+						return;
+					}
+					
+					if(phoneNumber == ""){
+						alert("전화번호를 입력하세요");
+						return;
+					}
+					
+					$.ajax({
+						type:"post"
+						, url:"/booking/create"
+						, data:{"name":name, "date":date, "day":day, "headCount":headCount, "phoneNumber":phoneNumber}
+						, success:function(data){
+							if(data.result == "success"){
+								alert("예약 완료입니다.");
+								location.href = "/booking/list";
+							}else{
+								alert("예약 실패입니다.");
+							}
+						
+						}
+						,error:function(){
+							alert("에러입니다.");
+						}
+					
+					
+					});
+					
+					
+				});
+				
+				
+				
+				
+				
+			});
+		
+		</script>
+</body>
+</html>

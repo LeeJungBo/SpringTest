@@ -29,5 +29,24 @@
  			, #{url}
  		)
  	</insert>
+ 	
+ 	<select id="selectUrl" parameterType="String" resultType="int" ><!-- count(*) 몇개인지의 결과를 돌려주어야하니 -->
+ 		SELECT
+ 			count(*)
+ 		FROM
+ 			`favorites`
+ 		WHERE
+ 			`url`= #{url};
+ 	</select>
+ 	
+ 	
+ 	
+ 	<delete id="deleteByOfObject" parameterType="int">
+ 		DELETE
+ 		FROM
+ 			`favorites`
+ 		WHERE
+ 			`id` = #{id};
+ 	</delete>
  
  </mapper>

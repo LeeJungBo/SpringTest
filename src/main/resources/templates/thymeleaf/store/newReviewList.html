@@ -2,7 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>상점목록</title>
+<title>상점에 매칭되는 리뷰</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/css/store/style.css">
@@ -10,17 +10,22 @@
 <body>
 
 	
-	<!-- a 태그에 주소 http://localhost:8080/newReview/list -->
 	<div id="wrap">
 		<header class="d-flex align-items-center bg-info">
 			<h1 class="ml-4 text-white font-weight-bold">배탈의 민족</h1>
 		</header>
 		<section>
 			<div class="display-4 text-secondary mt-2">우리동네 가게</div>
-			<div th:each="store : ${storeList}" class="item mt-3 pl-2 pt-2" >
-				<h4 th:text="${store.name}" class="mt-2 font-weight-bold">교촌치킨</h4>
-				<div th:text="${store.phoneNumber}">전화 번호 : 02-000-0000</div>
-				<div th:text="${store.address}">주소 : 서울시 서초구</div>
+			<div th:each="newReview : ${newReviewList}" class="item1 mt-3 pl-2 pt-2" >
+				<div class="d-flex">
+					<h4 th:text="${newReview.userName}" class="small mt-2 font-weight-bold">이정재</h4>
+					<div>
+						<span th:if>평점</span>
+					</div>
+				</div>
+				<div th:text="${#temporals.format(newReview.createdAt, 'yyyy년 M월 d일')}">2021년 4월 3일</div>
+				<div th:text="${newReview.review}">고기가 덜익어서 왔어요</div>
+				<div th:text="${newReview.menu}">목살 고기면</div>
 			</div>
 		</section>
 		<hr>
@@ -29,6 +34,8 @@
 			<div>고객센터 : 1500-1500</div>
 		</footer>
 	</div>
+
+
 
 
 
